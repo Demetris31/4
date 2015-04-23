@@ -1,28 +1,74 @@
-# Compiled Object files
-*.slo
-*.lo
-*.o
-*.obj
+#include <iostream>
+#include <fstream>
+#include <stdlib.h>
+#include <conio.h>
 
-# Precompiled Headers
-*.gch
-*.pch
+using namespace std;
 
-# Compiled Dynamic libraries
-*.so
-*.dylib
-*.dll
+int m,n;
+int x=0,sum=0,b[10];
 
-# Fortran module files
-*.mod
 
-# Compiled Static libraries
-*.lai
-*.la
-*.a
-*.lib
+int PRNT(int**array1)
+{
+	for(int i=0; i<m; i++)
+	{
+	     for(int j=0; j<n; j++)
+	     {
+	     	cout << array1[i][j]<< "\t";
+	     }
+	     cout << "\n";
+	}       
+	return 0;	
+}
 
-# Executables
-*.exe
-*.out
-*.app
+int OBR(int**array2)
+{
+	for(int i=0; i<m; i++)
+	{
+		for(int j=0; j<n; j++)
+		{
+//			x = array2[0][j];
+			if(x < array2[i][j]) x = array2[i][j];
+			else j++;
+		}
+	}
+	
+	int i;
+	
+	for(i=0; i<n; i++)
+	{
+		b[i] = x;
+		cout << "\nМаксимальные элементы в столбцах: " << b[i] << "\n";
+		sum+=b[i];
+		cout << "\nСумма наибольших значений: " << sum;
+	}
+	return 0;
+}
+
+int INPT()
+{
+	cout << "Введите количество строк: ";
+    cin >> m;
+    cout << "Введите количество столбцов: ";
+    cin >> n;
+    
+    int**array = new int*[m];
+    for(int i=0; i<m; i++)
+	{
+        array[i] = new int[n];
+        for(int j =0; j<n; j++)
+		{
+            array[i][j] = rand()%100;
+        }
+    }
+	PRNT(array);
+    OBR(array);
+    return 0;
+}
+
+int main()
+{
+	setlocale(LC_ALL,"Russian");
+	INPT();
+}
